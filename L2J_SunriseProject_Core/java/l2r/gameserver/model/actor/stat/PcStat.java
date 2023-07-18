@@ -283,7 +283,7 @@ public class PcStat extends PlayableStat
 	}
 	
 	@Override
-	public final boolean addLevel(byte value)
+	public final boolean addLevel(byte value, long exp)
 	{
 		if ((getLevel() + value) > (ExperienceData.getInstance().getMaxLevel() - 1))
 		{
@@ -293,7 +293,7 @@ public class PcStat extends PlayableStat
 		// Notify to scripts
 		EventDispatcher.getInstance().notifyEventAsync(new OnPlayerLevelChanged(getActiveChar(), getLevel(), getLevel() + value), getActiveChar());
 		
-		boolean levelIncreased = super.addLevel(value);
+		boolean levelIncreased = super.addLevel(value, exp);
 		if (levelIncreased)
 		{
 			if (!Config.DISABLE_TUTORIAL)
