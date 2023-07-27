@@ -142,6 +142,7 @@ public final class Config extends AbstractConfigs
 	
 	// sunrise
 	public static final String CHAMPION_MOBS_CONFIG = "./config/sunrise/ChampionMobs.ini";
+	public static final String BOSS_CONFIG_FILE = "./config/bosses/CustomDrops.ini";
 	
 	// Custom Mods
 	public static final String TO_MOB_CONFIG = "./config/extra/ToMob.ini";
@@ -711,7 +712,7 @@ public final class Config extends AbstractConfigs
 	public static float L2JMOD_CHAMPION_SPD_ATK;
 	public static int L2JMOD_CHAMPION_REWARD_LOWER_LVL_ITEM_CHANCE;
 	public static int L2JMOD_CHAMPION_REWARD_HIGHER_LVL_ITEM_CHANCE;
-	public static int L2JMOD_CHAMPION_REWARD_ID;
+	public static int[] L2JMOD_CHAMPION_REWARD_IDS;
 	public static int L2JMOD_CHAMPION_REWARD_QTY;
 	public static boolean L2JMOD_CHAMPION_ENABLE_VITALITY;
 	public static boolean L2JMOD_CHAMPION_ENABLE_IN_INSTANCES;
@@ -832,6 +833,18 @@ public final class Config extends AbstractConfigs
 	public static int DROP_ITEM_MIN_LEVEL_DIFFERENCE;
 	public static int DROP_ITEM_MAX_LEVEL_DIFFERENCE;
 	public static double DROP_ITEM_MIN_LEVEL_GAP_CHANCE;
+	
+	// --------------------------------------------------
+	// Custom Boss Drops Settings
+	// --------------------------------------------------
+	
+	public static boolean ENABLE_CUSTOM_DROP_RB;
+	public static String ID_RB_CUSTOM_DROP;
+	public static List<Integer> ID_RB_CUSTOM_DROP_LIST = new ArrayList<>();
+	public static int ID_ITEM_REQUIRED;
+	public static int COUNT_ITEM_REQUIRED;
+	public static int ID_ITEM_REWARD;
+	public static int COUNT_ITEM_REWARD;
 	
 	// --------------------------------------------------
 	// PvP Settings
@@ -2312,10 +2325,39 @@ public final class Config extends AbstractConfigs
 			L2JMOD_CHAMPION_SPD_ATK = champions.getFloat("ChampionSpdAtk", 1);
 			L2JMOD_CHAMPION_REWARD_LOWER_LVL_ITEM_CHANCE = champions.getInt("ChampionRewardLowerLvlItemChance", 0);
 			L2JMOD_CHAMPION_REWARD_HIGHER_LVL_ITEM_CHANCE = champions.getInt("ChampionRewardHigherLvlItemChance", 0);
-			L2JMOD_CHAMPION_REWARD_ID = champions.getInt("ChampionRewardItemID", 6393);
+			
+			String[] propertySplit5 = champions.getString("ChampionRewardItemIDs", "6393;57").trim().split(";");
+			L2JMOD_CHAMPION_REWARD_IDS = new int[propertySplit5.length];
+			try
+			{
+				int i = 0;
+				for (String itemId : propertySplit5)
+				{
+					L2JMOD_CHAMPION_REWARD_IDS[i++] = Integer.parseInt(itemId);
+				}
+			}
+			catch (NumberFormatException nfe)
+			{
+				_log.warn(nfe.getMessage(), nfe);
+			}
+			
 			L2JMOD_CHAMPION_REWARD_QTY = champions.getInt("ChampionRewardItemQty", 1);
 			L2JMOD_CHAMPION_ENABLE_VITALITY = champions.getBoolean("ChampionEnableVitality", false);
 			L2JMOD_CHAMPION_ENABLE_IN_INSTANCES = champions.getBoolean("ChampionEnableInInstances", false);
+			
+			// Custom Boss Drops Config
+			
+			final PropertiesParser CustomDrops = new PropertiesParser(BOSS_CONFIG_FILE);
+			ENABLE_CUSTOM_DROP_RB = CustomDrops.getBoolean("EnableCustomDropRB", true);
+			ID_RB_CUSTOM_DROP = CustomDrops.getString("IdRBCustomDrop", "25001,25002");
+			for (final String reward : ID_RB_CUSTOM_DROP.split(","))
+			{
+				ID_RB_CUSTOM_DROP_LIST.add(Integer.parseInt(reward));
+			}
+			ID_ITEM_REQUIRED = CustomDrops.getInt("IdItemRequired", 57);
+			COUNT_ITEM_REQUIRED = CustomDrops.getInt("CountItemRequired", 1);
+			ID_ITEM_REWARD = CustomDrops.getInt("IdItemReward", 57);
+			COUNT_ITEM_REWARD = CustomDrops.getInt("CountItemReward", 5000000);
 			
 			// Load To Mob File (if exists)
 			final PropertiesParser ToMob = new PropertiesParser(TO_MOB_CONFIG);

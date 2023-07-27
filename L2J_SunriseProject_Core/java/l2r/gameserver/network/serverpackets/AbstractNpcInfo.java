@@ -124,7 +124,7 @@ public abstract class AbstractNpcInfo extends L2GameServerPacket
 			
 			if (Config.SHOW_NPC_LVL && (_npc instanceof L2MonsterInstance) && ((L2Attackable) _npc).canShowLevelInTitle())
 			{
-				String t = "Lv " + cha.getLevel() + (cha.isAggressive() ? "*" : "");
+				String t = "Lv " + cha.getLevel() + cha.getTitle() + (cha.isAggressive() ? "*" : "");
 				if ((_title != null) && !_title.isEmpty())
 				{
 					t += " " + _title;
