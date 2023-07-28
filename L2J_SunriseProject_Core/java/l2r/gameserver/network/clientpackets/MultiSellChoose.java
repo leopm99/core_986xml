@@ -105,7 +105,7 @@ public class MultiSellChoose extends L2GameClientPacket
 			return;
 		}
 		
-		if ((_amount < 1) || (_amount > 5000))
+		if ((_amount < 1) || (_amount > 100000))
 		{
 			player.setMultiSell(null);
 			return;

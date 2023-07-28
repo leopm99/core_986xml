@@ -168,7 +168,14 @@ public class ServicesBBSManager extends BaseBBSManager
 					if (CommunityServicesConfigs.MULTISELL_LIST.contains(multi))
 					{
 						activeChar.setIsUsingAioMultisell(true);
-						MultisellData.getInstance().separateAndSend(multi, activeChar, null, false);
+						if ((multi == 90534) || (multi == 90535) || (multi == 90536) || (multi == 90537) || (multi == 90538))
+						{
+							MultisellData.getInstance().separateAndSend(multi, activeChar, null, true);
+						}
+						else
+						{
+							MultisellData.getInstance().separateAndSend(multi, activeChar, null, false);
+						}
 					}
 					else
 					{

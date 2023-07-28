@@ -157,6 +157,7 @@ public class L2RaidBossInstance extends L2MonsterInstance
 		{
 			player.getInventory().addItem("Reward", Config.ID_ITEM_REWARD, Config.COUNT_ITEM_REWARD, player, null);
 			player.getInventory().updateDatabase();
+			broadcastPacket(SystemMessage.getSystemMessage(SystemMessageId.EARNED_ITEM_S1));
 		}
 	}
 	
