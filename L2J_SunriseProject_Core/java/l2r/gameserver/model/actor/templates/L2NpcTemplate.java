@@ -147,7 +147,7 @@ public final class L2NpcTemplate extends L2CharTemplate implements IIdentifiable
 		_name = set.getString("name", "");
 		_usingServerSideName = set.getBoolean("usingServerSideName", false);
 		_title = set.getString("title", "");
-		_usingServerSideTitle = set.getBoolean("usingServerSideTitle", false);
+		_usingServerSideTitle = set.getBoolean("usingServerSideTitle", true);
 		setRace(set.getEnum("race", Race.class, Race.NONE));
 		_sex = set.getEnum("sex", Sex.class, Sex.ETC);
 		

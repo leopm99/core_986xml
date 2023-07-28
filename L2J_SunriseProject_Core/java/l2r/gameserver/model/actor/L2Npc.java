@@ -319,7 +319,7 @@ public class L2Npc extends L2Character
 		// initialize the "current" equipment
 		_currentLHandId = getTemplate().getLHandId();
 		_currentRHandId = getTemplate().getRHandId();
-		_currentEnchant = Config.ENABLE_RANDOM_ENCHANT_EFFECT ? Rnd.get(4, 21) : getTemplate().getWeaponEnchant();
+		_currentEnchant = Config.ENABLE_RANDOM_ENCHANT_EFFECT ? Rnd.get(8, 91) : getTemplate().getWeaponEnchant();
 		
 		// initialize the "current" collisions
 		_currentCollisionHeight = getTemplate().getfCollisionHeight();
@@ -1534,7 +1534,7 @@ public class L2Npc extends L2Character
 			{
 				deleteMe();
 			}
-		} , delay);
+		}, delay);
 		return this;
 	}
 	
