@@ -18,12 +18,14 @@
  */
 package l2r.gameserver.model.actor.instance;
 
+import l2r.Config;
 import l2r.gameserver.enums.InstanceType;
 import l2r.gameserver.instancemanager.RaidBossPointsManager;
 import l2r.gameserver.model.actor.L2Character;
 import l2r.gameserver.model.actor.L2Summon;
 import l2r.gameserver.model.actor.templates.L2NpcTemplate;
 import l2r.gameserver.model.entity.Hero;
+import l2r.gameserver.model.items.instance.L2ItemInstance;
 import l2r.gameserver.network.SystemMessageId;
 import l2r.gameserver.network.serverpackets.SystemMessage;
 import l2r.gameserver.util.Broadcast;
@@ -103,6 +105,7 @@ public final class L2GrandBossInstance extends L2MonsterInstance
 			{
 				for (L2PcInstance member : player.getParty().getMembers())
 				{
+					SpecialReward(member);
 					RaidBossPointsManager.getInstance().addPoints(member, getId(), (getLevel() / 2) + Rnd.get(-5, 5));
 					if (member.isNoble())
 					{
@@ -112,6 +115,7 @@ public final class L2GrandBossInstance extends L2MonsterInstance
 			}
 			else
 			{
+				SpecialReward(player);
 				RaidBossPointsManager.getInstance().addPoints(player, getId(), (getLevel() / 2) + Rnd.get(-5, 5));
 				if (player.isNoble())
 				{
@@ -143,5 +147,25 @@ public final class L2GrandBossInstance extends L2MonsterInstance
 	public boolean giveRaidCurse()
 	{
 		return _useRaidCurse;
+	}
+	
+	private void SpecialReward(L2PcInstance player)
+	{
+		if (Config.ENABLE_CUSTOM_DROP_GRB && (Config.ID_GRB_CUSTOM_DROP_LIST.contains(getId()) && player.isInsideRadius(getX(), getY(), getZ(), 1200, false, false) && checkCountItemInventory(Config.ID_ITEM_REQUIRED_GRB, Config.COUNT_ITEM_REQUIRED_GRB, player)))
+		{
+			player.getInventory().addItem("RewardGRB", Config.ID_ITEM_REWARD_GRB, Config.COUNT_ITEM_REWARD_GRB, player, null);
+			player.getInventory().updateDatabase();
+			player.sendMessage("You have earned " + Config.COUNT_ITEM_REWARD_GRB + " " + Config.NAME_ITEM_REWARD_GRB + ".");
+		}
+	}
+	
+	public boolean checkCountItemInventory(int item_id, int countRequired, L2PcInstance player)
+	{
+		final L2ItemInstance item = player.getInventory().getItemByItemId(item_id);
+		if (item == null)
+		{
+			return false;
+		}
+		return item.getCount() >= countRequired ? player.destroyItemByItemId("Consumed", item_id, countRequired, player, false) : false;
 	}
 }

@@ -841,10 +841,19 @@ public final class Config extends AbstractConfigs
 	public static boolean ENABLE_CUSTOM_DROP_RB;
 	public static String ID_RB_CUSTOM_DROP;
 	public static List<Integer> ID_RB_CUSTOM_DROP_LIST = new ArrayList<>();
-	public static int ID_ITEM_REQUIRED;
-	public static int COUNT_ITEM_REQUIRED;
-	public static int ID_ITEM_REWARD;
-	public static int COUNT_ITEM_REWARD;
+	public static int ID_ITEM_REQUIRED_RB;
+	public static int COUNT_ITEM_REQUIRED_RB;
+	public static int ID_ITEM_REWARD_RB;
+	public static String NAME_ITEM_REWARD_RB;
+	public static int COUNT_ITEM_REWARD_RB;
+	public static boolean ENABLE_CUSTOM_DROP_GRB;
+	public static String ID_GRB_CUSTOM_DROP;
+	public static List<Integer> ID_GRB_CUSTOM_DROP_LIST = new ArrayList<>();
+	public static int ID_ITEM_REQUIRED_GRB;
+	public static int COUNT_ITEM_REQUIRED_GRB;
+	public static int ID_ITEM_REWARD_GRB;
+	public static String NAME_ITEM_REWARD_GRB;
+	public static int COUNT_ITEM_REWARD_GRB;
 	
 	// --------------------------------------------------
 	// PvP Settings
@@ -2345,7 +2354,7 @@ public final class Config extends AbstractConfigs
 			L2JMOD_CHAMPION_ENABLE_VITALITY = champions.getBoolean("ChampionEnableVitality", false);
 			L2JMOD_CHAMPION_ENABLE_IN_INSTANCES = champions.getBoolean("ChampionEnableInInstances", false);
 			
-			// Custom Boss Drops Config
+			// Custom Boss & Grand Boss Special Drops Configs.
 			
 			final PropertiesParser CustomDrops = new PropertiesParser(BOSS_CONFIG_FILE);
 			ENABLE_CUSTOM_DROP_RB = CustomDrops.getBoolean("EnableCustomDropRB", true);
@@ -2354,10 +2363,23 @@ public final class Config extends AbstractConfigs
 			{
 				ID_RB_CUSTOM_DROP_LIST.add(Integer.parseInt(reward));
 			}
-			ID_ITEM_REQUIRED = CustomDrops.getInt("IdItemRequired", 57);
-			COUNT_ITEM_REQUIRED = CustomDrops.getInt("CountItemRequired", 1);
-			ID_ITEM_REWARD = CustomDrops.getInt("IdItemReward", 57);
-			COUNT_ITEM_REWARD = CustomDrops.getInt("CountItemReward", 5000000);
+			ID_ITEM_REQUIRED_RB = CustomDrops.getInt("IdItemRequired", 57);
+			COUNT_ITEM_REQUIRED_RB = CustomDrops.getInt("CountItemRequired", 1);
+			ID_ITEM_REWARD_RB = CustomDrops.getInt("IdItemReward", 57);
+			COUNT_ITEM_REWARD_RB = CustomDrops.getInt("CountItemReward", 5000000);
+			
+			ENABLE_CUSTOM_DROP_GRB = CustomDrops.getBoolean("EnableCustomDropGRB", false);
+			ID_GRB_CUSTOM_DROP = CustomDrops.getString("IdGRBCustomDrop", "29001,29002");
+			
+			for (final String rewardgrb : ID_GRB_CUSTOM_DROP.split(","))
+			{
+				ID_GRB_CUSTOM_DROP_LIST.add(Integer.parseInt(rewardgrb));
+			}
+			ID_ITEM_REQUIRED_GRB = CustomDrops.getInt("IdItemRequiredGRB", 57);
+			COUNT_ITEM_REQUIRED_GRB = CustomDrops.getInt("CountItemRequiredGRB", 200);
+			ID_ITEM_REWARD_GRB = CustomDrops.getInt("IdItemRewardGRB", 5072);
+			NAME_ITEM_REWARD_GRB = CustomDrops.getString("NameItemRewardGRB", "Twin Coda");
+			COUNT_ITEM_REWARD_GRB = CustomDrops.getInt("CountItemRewardGRB", 500);
 			
 			// Load To Mob File (if exists)
 			final PropertiesParser ToMob = new PropertiesParser(TO_MOB_CONFIG);

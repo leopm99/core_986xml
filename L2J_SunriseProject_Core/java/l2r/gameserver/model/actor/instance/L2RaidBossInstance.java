@@ -153,11 +153,12 @@ public class L2RaidBossInstance extends L2MonsterInstance
 	
 	private void SpecialReward(L2PcInstance player)
 	{
-		if (Config.ENABLE_CUSTOM_DROP_RB && (Config.ID_RB_CUSTOM_DROP_LIST.contains(getId()) && player.isInsideRadius(getX(), getY(), getZ(), 2200, false, false) && checkCountItemInventory(Config.ID_ITEM_REQUIRED, Config.COUNT_ITEM_REQUIRED, player)))
+		if (Config.ENABLE_CUSTOM_DROP_RB && (Config.ID_RB_CUSTOM_DROP_LIST.contains(getId()) && player.isInsideRadius(getX(), getY(), getZ(), 2200, false, false) && checkCountItemInventory(Config.ID_ITEM_REQUIRED_RB, Config.COUNT_ITEM_REQUIRED_RB, player)))
 		{
-			player.getInventory().addItem("Reward", Config.ID_ITEM_REWARD, Config.COUNT_ITEM_REWARD, player, null);
+			player.getInventory().addItem("Reward", Config.ID_ITEM_REWARD_RB, Config.COUNT_ITEM_REWARD_RB, player, null);
 			player.getInventory().updateDatabase();
-			broadcastPacket(SystemMessage.getSystemMessage(SystemMessageId.EARNED_ITEM_S1));
+			player.setRecomHave(player.getRecomHave() + 20);
+			player.sendMessage("You have earned " + Config.COUNT_ITEM_REWARD_RB + " " + Config.NAME_ITEM_REWARD_RB + ".");
 		}
 	}
 	
