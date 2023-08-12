@@ -38,6 +38,7 @@ import l2r.features.sellBuffEngine.configs.impl.BuffShopConfigs;
 import l2r.gameserver.cache.HtmCache;
 import l2r.gameserver.communitybbs.SunriseBoards.dropCalc.DropCalculatorConfigs;
 import l2r.gameserver.communitybbs.SunriseBoards.dropCalc.DropInfoHandler;
+import l2r.gameserver.communitybbs.SunriseBoards.subClass.SubClassConfigs;
 import l2r.gameserver.dao.factory.impl.DAOFactory;
 import l2r.gameserver.data.EventDroplist;
 import l2r.gameserver.data.SpawnTable;
@@ -539,6 +540,7 @@ public class GameServer
 		FloodProtectorsConfig.load();
 		// Sunrise configs load section
 		DropCalculatorConfigs.getInstance().loadConfigs();
+		SubClassConfigs.getInstance().loadConfigs();
 		ConfigsController.getInstance().reloadSunriseConfigs();
 		// Check binding address
 		checkFreePorts();

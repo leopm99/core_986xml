@@ -158,7 +158,9 @@ public class L2RaidBossInstance extends L2MonsterInstance
 			player.getInventory().addItem("Reward", Config.ID_ITEM_REWARD_RB, Config.COUNT_ITEM_REWARD_RB, player, null);
 			player.getInventory().updateDatabase();
 			player.setRecomHave(player.getRecomHave() + 20);
-			player.sendMessage("You have earned " + Config.COUNT_ITEM_REWARD_RB + " " + Config.NAME_ITEM_REWARD_RB + ".");
+			SystemMessage sm = SystemMessage.getSystemMessage(SystemMessageId.EARNED_ITEM_S1);
+			sm.addString(Config.NAME_ITEM_REWARD_RB);
+			player.broadcastPacket(sm);
 		}
 	}
 	

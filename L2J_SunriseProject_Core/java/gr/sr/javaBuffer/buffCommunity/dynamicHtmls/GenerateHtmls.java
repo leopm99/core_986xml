@@ -26,7 +26,7 @@ import gr.sr.javaBuffer.xml.dataHolder.BuffsHolder;
 public class GenerateHtmls
 {
 	/* Constants for dynamic htmls */
-	private static final String _headHtml = "<html noscrollbar><title>L2jSunrise Community Board</title><body><br><table width=755><tr><td><center><table border=0 cellpadding=0 cellspacing=0 width=769 height=492 background=\"l2ui_ct1.Windows_DF_TooltipBG\"><tr><td valign=\"top\" align=\"center\"><table  width=450><tr><td align=center><br><font name=\"hs12\">Community Buffer</font></td></tr><tr><td align=center><img src=\"L2UI.SquareGray\" width=160 height=1><br><br><br><br></td></tr></table><br>";
+	private static final String _headHtml = "<html noscrollbar><title>Community Board</title><body><br><table width=755><tr><td><center><table border=0 cellpadding=0 cellspacing=0 width=769 height=492 background=\"l2ui_ct1.Windows_DF_TooltipBG\"><tr><td valign=\"top\" align=\"center\"><table  width=450><tr><td align=center><br><font name=\"hs12\">Community Buffer</font></td></tr><tr><td align=center><img src=\"L2UI.SquareGray\" width=160 height=1><br><br><br><br></td></tr></table><br>";
 	private static final String _endHtml = "</td></tr></table></center></td></tr></table></body></html>";
 	
 	/**

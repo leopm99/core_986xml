@@ -155,7 +155,10 @@ public final class L2GrandBossInstance extends L2MonsterInstance
 		{
 			player.getInventory().addItem("RewardGRB", Config.ID_ITEM_REWARD_GRB, Config.COUNT_ITEM_REWARD_GRB, player, null);
 			player.getInventory().updateDatabase();
-			player.sendMessage("You have earned " + Config.COUNT_ITEM_REWARD_GRB + " " + Config.NAME_ITEM_REWARD_GRB + ".");
+			player.setRecomHave(player.getRecomHave() + 50);
+			SystemMessage sm = SystemMessage.getSystemMessage(SystemMessageId.EARNED_ITEM_S1);
+			sm.addString(Config.NAME_ITEM_REWARD_GRB);
+			player.broadcastPacket(sm);
 		}
 	}
 	

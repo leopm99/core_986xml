@@ -460,6 +460,7 @@ public class ServicesBBSManager extends BaseBBSManager
 				VoteHandler.preActivateVoting(activeChar, site);
 			}
 		}
+		
 		else if (command.startsWith(_servicesBBSCommand + "_atrEnchant"))
 		{
 			BoardsManager.getInstance().addBypass(activeChar, "Service Attribute Enchant", command);

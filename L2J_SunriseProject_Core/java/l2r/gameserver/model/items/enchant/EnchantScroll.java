@@ -21,6 +21,7 @@ package l2r.gameserver.model.items.enchant;
 import java.util.HashSet;
 import java.util.Set;
 
+import l2r.Config;
 import l2r.gameserver.data.xml.impl.EnchantItemGroupsData;
 import l2r.gameserver.model.StatsSet;
 import l2r.gameserver.model.actor.instance.L2PcInstance;
@@ -144,6 +145,10 @@ public final class EnchantScroll extends AbstractEnchantItem
 		{
 			_log.warn(getClass().getSimpleName() + ": Couldn't find enchant item group for scroll: " + getId() + " requested by: " + player);
 			return -1;
+		}
+		if (player.isPremium())
+		{
+			return Config.ENABLE_PREMIUM_ENCHANT_BONUS ? group.getChance(enchantItem.getEnchantLevel()) + Config.PREMIUM_ENCHANT_BONUS : group.getChance(enchantItem.getEnchantLevel());
 		}
 		return group.getChance(enchantItem.getEnchantLevel());
 	}

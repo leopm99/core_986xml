@@ -142,10 +142,16 @@ public final class Config extends AbstractConfigs
 	
 	// sunrise
 	public static final String CHAMPION_MOBS_CONFIG = "./config/sunrise/ChampionMobs.ini";
+	public static final String PREMIUM_CONFIG = "./config/sunrise/PremiumService.ini";
 	public static final String BOSS_CONFIG_FILE = "./config/bosses/CustomDrops.ini";
 	
 	// Custom Mods
 	public static final String TO_MOB_CONFIG = "./config/extra/ToMob.ini";
+	
+	/* .res */
+	public static boolean COMMAND_RES;
+	public static int ITEM_ID_RESS;
+	public static int PRICE_RESS;
 	
 	// --------------------------------------------------
 	// L2J Variable Definitions
@@ -727,6 +733,15 @@ public final class Config extends AbstractConfigs
 	public static int TO_MOB_TIME;
 	public static int ID_ITEM_TO_MOB;
 	public static int COUNT_ITEM_TO_MOB;
+	
+	// --------------------------------------------------
+	// Premium
+	// --------------------------------------------------
+	public static boolean ENABLE_PREMIUM_ENCHANT_BONUS;
+	public static int PREMIUM_ENCHANT_BONUS;
+	public static boolean ALLOW_PREMIUM_CRAFT_CHANCE_BONUS;
+	public static int PREMIUM_CRAFT_CHANCE_BONUS;
+	public static int PREMIUM_RARE_CRAFT_CHANCE_BONUS;
 	
 	// --------------------------------------------------
 	// L2JMods Settings
@@ -2354,6 +2369,15 @@ public final class Config extends AbstractConfigs
 			L2JMOD_CHAMPION_ENABLE_VITALITY = champions.getBoolean("ChampionEnableVitality", false);
 			L2JMOD_CHAMPION_ENABLE_IN_INSTANCES = champions.getBoolean("ChampionEnableInInstances", false);
 			
+			// New Premium Bonus Configs.
+			
+			final PropertiesParser premium = new PropertiesParser(PREMIUM_CONFIG);
+			ENABLE_PREMIUM_ENCHANT_BONUS = premium.getBoolean("AllowPremiumEnchantBonus", false);
+			PREMIUM_ENCHANT_BONUS = premium.getInt("PremiumEnchantBonus", 20);
+			ALLOW_PREMIUM_CRAFT_CHANCE_BONUS = premium.getBoolean("AllowPremiumCraftChanceBonus", false);
+			PREMIUM_CRAFT_CHANCE_BONUS = premium.getInt("PremiumCraftBonusRate", 20);
+			PREMIUM_RARE_CRAFT_CHANCE_BONUS = premium.getInt("PremiumMasterWorkBonusRate", 20);
+			
 			// Custom Boss & Grand Boss Special Drops Configs.
 			
 			final PropertiesParser CustomDrops = new PropertiesParser(BOSS_CONFIG_FILE);
@@ -2363,10 +2387,11 @@ public final class Config extends AbstractConfigs
 			{
 				ID_RB_CUSTOM_DROP_LIST.add(Integer.parseInt(reward));
 			}
-			ID_ITEM_REQUIRED_RB = CustomDrops.getInt("IdItemRequired", 57);
-			COUNT_ITEM_REQUIRED_RB = CustomDrops.getInt("CountItemRequired", 1);
-			ID_ITEM_REWARD_RB = CustomDrops.getInt("IdItemReward", 57);
-			COUNT_ITEM_REWARD_RB = CustomDrops.getInt("CountItemReward", 5000000);
+			ID_ITEM_REQUIRED_RB = CustomDrops.getInt("IdItemRequiredRB", 57);
+			COUNT_ITEM_REQUIRED_RB = CustomDrops.getInt("CountItemRequiredRB", 1);
+			ID_ITEM_REWARD_RB = CustomDrops.getInt("IdItemRewardRB", 57);
+			NAME_ITEM_REWARD_RB = CustomDrops.getString("NameItemRewardRB", "Twin Coda");
+			COUNT_ITEM_REWARD_RB = CustomDrops.getInt("CountItemRewardRB", 100);
 			
 			ENABLE_CUSTOM_DROP_GRB = CustomDrops.getBoolean("EnableCustomDropGRB", false);
 			ID_GRB_CUSTOM_DROP = CustomDrops.getString("IdGRBCustomDrop", "29001,29002");
@@ -2512,6 +2537,10 @@ public final class Config extends AbstractConfigs
 				}
 			}
 			L2JMOD_ALLOW_CHANGE_PASSWORD = L2JModSettings.getBoolean("AllowChangePassword", false);
+			
+			COMMAND_RES = L2JModSettings.getBoolean("AllowResCommand", false);
+			ITEM_ID_RESS = L2JModSettings.getInt("ItemRequiredRes", 57);
+			PRICE_RESS = L2JModSettings.getInt("ItemCountRes", 57);
 			
 			// Load PvP L2Properties file (if exists)
 			final PropertiesParser PVPSettings = new PropertiesParser(PVP_CONFIG_FILE);

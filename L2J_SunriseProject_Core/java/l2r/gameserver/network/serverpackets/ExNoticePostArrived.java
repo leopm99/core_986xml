@@ -23,7 +23,7 @@ package l2r.gameserver.network.serverpackets;
  */
 public class ExNoticePostArrived extends L2GameServerPacket
 {
-	private static final ExNoticePostArrived STATIC_PACKET_TRUE = new ExNoticePostArrived(true);
+	public static final ExNoticePostArrived STATIC_PACKET_TRUE = new ExNoticePostArrived(true);
 	private static final ExNoticePostArrived STATIC_PACKET_FALSE = new ExNoticePostArrived(false);
 	
 	public static final ExNoticePostArrived valueOf(boolean result)

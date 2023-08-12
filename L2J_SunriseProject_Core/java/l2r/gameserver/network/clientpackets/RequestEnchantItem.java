@@ -463,7 +463,7 @@ public final class RequestEnchantItem extends L2GameClientPacket
 	
 	public static void showEnchantAnimation(L2PcInstance player, int enchantLevel)
 	{
-		if (player.getVarB("showEnchantAnime") && (enchantLevel <= 20))
+		if (player.getVarB("showEnchantAnime") && (enchantLevel <= 65534))
 		{
 			final int skillId = 23096 + enchantLevel;
 			final MagicSkillUse msu = new MagicSkillUse(player, player, skillId, 1, 1, 1);

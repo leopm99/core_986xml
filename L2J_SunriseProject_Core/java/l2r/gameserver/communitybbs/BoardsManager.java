@@ -26,10 +26,9 @@ import l2r.gameserver.communitybbs.Managers.ClanBBSManager;
 import l2r.gameserver.communitybbs.Managers.DonateBBSManager;
 import l2r.gameserver.communitybbs.Managers.DropInfoBBSManager;
 import l2r.gameserver.communitybbs.Managers.FavoriteBBSManager;
-import l2r.gameserver.communitybbs.Managers.PostBBSManager;
 import l2r.gameserver.communitybbs.Managers.ServicesBBSManager;
+import l2r.gameserver.communitybbs.Managers.SubClassBBSManager;
 import l2r.gameserver.communitybbs.Managers.TopBBSManager;
-import l2r.gameserver.communitybbs.Managers.TopicBBSManager;
 import l2r.gameserver.model.actor.instance.L2PcInstance;
 import l2r.gameserver.network.L2GameClient;
 import l2r.gameserver.network.SystemMessageId;
@@ -81,15 +80,18 @@ public class BoardsManager
 		}
 		else if (command.startsWith("_bbsmemo"))
 		{
-			TopicBBSManager.getInstance().cbByPass(command, activeChar);
+			SubClassBBSManager.getInstance().cbByPass(command, activeChar);
+			// TopicBBSManager.getInstance().cbByPass(command, activeChar);
 		}
 		else if (command.startsWith("_bbstopics"))
 		{
-			TopicBBSManager.getInstance().cbByPass(command, activeChar);
+			SubClassBBSManager.getInstance().cbByPass(command, activeChar);
+			// TopicBBSManager.getInstance().cbByPass(command, activeChar);
 		}
 		else if (command.startsWith("_bbsposts"))
 		{
-			PostBBSManager.getInstance().cbByPass(command, activeChar);
+			SubClassBBSManager.getInstance().cbByPass(command, activeChar);
+			// PostBBSManager.getInstance().cbByPass(command, activeChar);
 		}
 		else if (command.startsWith("_bbstop"))
 		{
@@ -139,11 +141,13 @@ public class BoardsManager
 		
 		if (url.equals("Topic"))
 		{
-			TopicBBSManager.getInstance().parsewrite(url, arg1, arg2, arg3, arg4, arg5, activeChar);
+			SubClassBBSManager.getInstance().parsewrite(url, arg1, arg2, arg3, arg4, arg5, activeChar);
+			// TopicBBSManager.getInstance().parsewrite(url, arg1, arg2, arg3, arg4, arg5, activeChar);
 		}
 		else if (url.equals("Post"))
 		{
-			PostBBSManager.getInstance().parsewrite(url, arg1, arg2, arg3, arg4, arg5, activeChar);
+			SubClassBBSManager.getInstance().parsewrite(url, arg1, arg2, arg3, arg4, arg5, activeChar);
+			// PostBBSManager.getInstance().parsewrite(url, arg1, arg2, arg3, arg4, arg5, activeChar);
 		}
 		else if (url.equals("Region"))
 		{
